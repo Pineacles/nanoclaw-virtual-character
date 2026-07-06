@@ -1542,10 +1542,7 @@ async function main(): Promise<void> {
           session_id: webSessionId,
         });
         const webChannel = channels.find((c) => c.name === 'web');
-        await webChannel?.broadcastOnly?.(
-          formatted,
-          webSessionId,
-        );
+        await webChannel?.broadcastOnly?.(formatted, webSessionId);
       }
     },
     sendMedia: async (jid, media) => {

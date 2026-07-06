@@ -100,11 +100,7 @@ export interface WebServer {
    * Used when the caller already stored the message explicitly (impulse/sched
    * paths) so the web UI still sees it but no duplicate row is created.
    */
-  broadcastMessage(
-    text: string,
-    sessionId: string,
-    mood?: string,
-  ): void;
+  broadcastMessage(text: string, sessionId: string, mood?: string): void;
   injectBridgedMessage(
     senderJid: string,
     senderName: string,

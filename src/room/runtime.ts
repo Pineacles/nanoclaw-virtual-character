@@ -189,14 +189,22 @@ async function generateDreamTrace(
             path.join(GROUPS_DIR, groupFolder, 'group.json'),
             'utf-8',
           ),
-        ) as { timezone?: string; assistant?: { name?: string }; user?: { name?: string } };
+        ) as {
+          timezone?: string;
+          assistant?: { name?: string };
+          user?: { name?: string };
+        };
         return {
           tz: raw.timezone || 'UTC',
           assistantName: raw.assistant?.name || ASSISTANT_NAME,
           userName: raw.user?.name || USER_NAME,
         };
       } catch {
-        return { tz: 'UTC', assistantName: ASSISTANT_NAME, userName: USER_NAME };
+        return {
+          tz: 'UTC',
+          assistantName: ASSISTANT_NAME,
+          userName: USER_NAME,
+        };
       }
     })();
     const timeStr = now.toLocaleString('en-GB', {

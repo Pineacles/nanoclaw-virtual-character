@@ -76,12 +76,14 @@ describe('FIX 1: paced bubble splitting', () => {
     const bubbles = splitBubbles(stripped);
     // The mood tag should NOT be a separate bubble
     expect(bubbles).toHaveLength(2);
-    expect(bubbles).toEqual(['tired but okay', '야 2시간이면 거의 안 잔 거잖아']);
+    expect(bubbles).toEqual([
+      'tired but okay',
+      '야 2시간이면 거의 안 잔 거잖아',
+    ]);
   });
 
   it('mood tag is re-attached to the last web bubble only', () => {
-    const text =
-      'first\n\nsecond\n\n*[mood:tired:40,soft:35,playful:25:4]*';
+    const text = 'first\n\nsecond\n\n*[mood:tired:40,soft:35,playful:25:4]*';
     const { webBubbles, waBubbles } = pacedBubbles(text);
     expect(webBubbles).toHaveLength(2);
     // Last web bubble has the tag re-attached for applyMoodTag
@@ -95,7 +97,8 @@ describe('FIX 1: paced bubble splitting', () => {
   });
 
   it('single-sentence reply with mood tag produces one bubble (not paced)', () => {
-    const text = '웅 send them and I\'ll log everything\n\n*[mood:tired:40,soft:35,playful:25:4]*';
+    const text =
+      "웅 send them and I'll log everything\n\n*[mood:tired:40,soft:35,playful:25:4]*";
     const stripped = stripMoodTags(text);
     const bubbles = splitBubbles(stripped);
     // Only one bubble → not paced (length <= 1 after strip)

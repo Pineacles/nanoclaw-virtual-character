@@ -786,9 +786,13 @@ export function applyMoodTag(text: string): {
         const current = resolveMood();
         return { cleanText, mood: current.current_mood };
       }
-      const safeEnergy = Number.isFinite(newEnergy) ? newEnergy : existingData.energy;
+      const safeEnergy = Number.isFinite(newEnergy)
+        ? newEnergy
+        : existingData.energy;
       // Primary mood = highest weight
-      const primary = Object.entries(safeDist).sort((a, b) => b[1] - a[1])[0][0];
+      const primary = Object.entries(safeDist).sort(
+        (a, b) => b[1] - a[1],
+      )[0][0];
       const data = existingData;
       data.current_mood = primary;
       data.energy = safeEnergy;

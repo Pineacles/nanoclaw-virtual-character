@@ -21,7 +21,12 @@ vi.mock('../../db.js', () => ({
   countRecentMessages: vi.fn(() => 0),
 }));
 
-import { stripMoodTags, extractMoodTag, applyMoodTag, resolveMood } from './mood.js';
+import {
+  stripMoodTags,
+  extractMoodTag,
+  applyMoodTag,
+  resolveMood,
+} from './mood.js';
 import { getGroupConfig } from './group-config.js';
 
 // Baseline mood state returned by all readFileSync stubs.
@@ -40,9 +45,7 @@ let writeSpy: ReturnType<typeof vi.spyOn>;
 
 beforeEach(() => {
   existsSpy = vi.spyOn(fs, 'existsSync').mockReturnValue(false);
-  readSpy = vi
-    .spyOn(fs, 'readFileSync')
-    .mockReturnValue(BASE_MOOD as any);
+  readSpy = vi.spyOn(fs, 'readFileSync').mockReturnValue(BASE_MOOD as any);
   writeSpy = vi.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
   // silence mkdirSync if mood.ts ever calls it
   vi.spyOn(fs, 'mkdirSync').mockImplementation(() => undefined as any);
@@ -110,9 +113,7 @@ describe('stripMoodTags regression — FIX 1', () => {
   });
 
   it('returns empty string for a mood-tag-only text', () => {
-    expect(
-      stripMoodTags('*[mood:tired:40,soft:35,playful:25:4]*'),
-    ).toBe('');
+    expect(stripMoodTags('*[mood:tired:40,soft:35,playful:25:4]*')).toBe('');
   });
 });
 

@@ -14,8 +14,8 @@ vi.mock('../config.js', () => ({
 // Mock presence engine — readGroupFeature returns true for 'presence_indicator'
 // on registered groups so typing/read-receipt tests are not filesystem-dependent.
 vi.mock('../presence/engine.js', () => ({
-  readGroupFeature: vi.fn((_folder: string, feature: string) =>
-    feature === 'presence_indicator',
+  readGroupFeature: vi.fn(
+    (_folder: string, feature: string) => feature === 'presence_indicator',
   ),
   computePresence: vi.fn(() => ({
     state: 'online',

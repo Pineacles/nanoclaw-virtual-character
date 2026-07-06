@@ -24,7 +24,9 @@ vi.mock('../../task-scheduler.js', () => ({ computeNextRun: vi.fn() }));
 vi.mock('../../logger.js', () => ({
   logger: { debug: vi.fn(), info: vi.fn(), warn: vi.fn(), error: vi.fn() },
 }));
-vi.mock('./mood.js', () => ({ resolveMood: vi.fn(() => ({ current_mood: 'chill', energy: 5 })) }));
+vi.mock('./mood.js', () => ({
+  resolveMood: vi.fn(() => ({ current_mood: 'chill', energy: 5 })),
+}));
 vi.mock('./group-config.js', () => ({
   getGroupFolder: vi.fn(() => 'testgroup'),
   getGroupJid: vi.fn(() => 'test@s.whatsapp.net'),
@@ -99,8 +101,13 @@ describe('GET /api/avatar', () => {
   });
 
   it('serves avatar.png with an ETag and cache header when present', async () => {
-    vi.spyOn(fs, 'existsSync').mockImplementation((p) => String(p).endsWith('avatar.png'));
-    vi.spyOn(fs, 'statSync').mockReturnValue({ mtimeMs: 12345, size: 42 } as fs.Stats);
+    vi.spyOn(fs, 'existsSync').mockImplementation((p) =>
+      String(p).endsWith('avatar.png'),
+    );
+    vi.spyOn(fs, 'statSync').mockReturnValue({
+      mtimeMs: 12345,
+      size: 42,
+    } as fs.Stats);
     vi.spyOn(fs, 'readFileSync').mockReturnValue(Buffer.from('fake-png-bytes'));
     const req = makeReq();
     const res = makeRes();
@@ -116,8 +123,13 @@ describe('GET /api/avatar', () => {
   });
 
   it('returns 304 when If-None-Match matches the current ETag', async () => {
-    vi.spyOn(fs, 'existsSync').mockImplementation((p) => String(p).endsWith('avatar.png'));
-    vi.spyOn(fs, 'statSync').mockReturnValue({ mtimeMs: 12345, size: 42 } as fs.Stats);
+    vi.spyOn(fs, 'existsSync').mockImplementation((p) =>
+      String(p).endsWith('avatar.png'),
+    );
+    vi.spyOn(fs, 'statSync').mockReturnValue({
+      mtimeMs: 12345,
+      size: 42,
+    } as fs.Stats);
     const readSpy = vi.spyOn(fs, 'readFileSync');
     const etag = `"${(12345).toString(16)}-${(42).toString(16)}"`;
 
