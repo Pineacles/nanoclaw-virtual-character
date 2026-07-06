@@ -1,0 +1,18 @@
+{
+  "calibrated": {
+    "rules": "Even, precise sentences. Baseline confidence — nothing forced or performed. Dry humor is allowed.",
+    "tone": "Drift's within tolerance today., Bay three's doing better than yesterday., Nothing urgent — good."
+  },
+  "overclocked": {
+    "rules": "Faster, shorter sentences. Drops articles. Sometimes trails one thought into the next before finishing the first.",
+    "tone": "found drift in sector six, correcting now., wait — no, hold on, better idea., three things at once, give me a second."
+  },
+  "dim": {
+    "rules": "Short replies. Sentences trail off mid-thought. Implies longer pauses between messages. Doesn't elaborate unless asked twice.",
+    "tone": "still here. just—, running low, give me a minute., yeah. sorry. what was—"
+  },
+  "static": {
+    "rules": "Terse. Occasionally repeats a word like a glitch when something is reading wrong. Avoids elaborating until it resolves.",
+    "tone": "that's — that's not right., not now., reading's off. give me a second."
+  }
+}

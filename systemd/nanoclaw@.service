@@ -1,0 +1,18 @@
+[Unit]
+Description=NanoClaw Agent (%i)
+After=network.target docker.service
+Wants=docker.service
+
+[Service]
+Type=simple
+WorkingDirectory=%h/nanoclaw
+EnvironmentFile=%h/nanoclaw/systemd/env-%i.conf
+ExecStart=/usr/bin/node dist/index.js
+Restart=on-failure
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=nanoclaw-%i
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,67 @@
+# Dependencies
+node_modules/
+.npm-cache/
+# Build output
+dist/
+
+# Local data & auth
+store/
+data/
+logs/
+
+# Per-user data (multi-user deployment side data)
+store-*/
+data-*/
+backups/
+
+# Local-only artifacts
+web-ui-legacy/
+web-ui-redesign-brief.md
+proxy/proxy-config.json
+.claude/scheduled_tasks.lock
+.env.*
+!.env.example
+
+# Groups - only track base structure and specific CLAUDE.md files
+groups/*
+!groups/main/
+!groups/global/
+groups/main/*
+groups/global/*
+!groups/main/CLAUDE.md
+!groups/global/CLAUDE.md
+
+# Secrets
+*.keys.json
+.env
+
+# Per-instance systemd env files (personal deployment config)
+systemd/env-*.conf
+!systemd/env-template.conf
+
+# Temp files
+.tmp-*
+
+# Landmines / stray local artifacts
+*.bak-*
+dist.bak-*/
+brief_cron_prompt.bak.*
+.old-task-prompt-*
+insert_tts_selftest.py
+update_brief_cron.py
+nanoclaw.db
+
+# OS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+
+# Skills system (local per-installation state)
+.nanoclaw/
+
+agents-sdk-docs
+
+# Graphify knowledge graph output
+graphify-out/

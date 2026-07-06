@@ -1,0 +1,160 @@
+/*
+ * NanoClaw animation library.
+ * All animations gate on prefers-reduced-motion: no-preference.
+ * Reduced-motion users get only theme color transitions (nc-page).
+ */
+
+/* ── Theme crossfade — always on, even for reduced-motion (color only, no motion) ── */
+.nc-page {
+  transition:
+    background-color var(--nc-dur-standard) var(--nc-ease-state),
+    color var(--nc-dur-standard) var(--nc-ease-state),
+    border-color var(--nc-dur-standard) var(--nc-ease-state);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* ── Message arrival: fade + rise 8px ── */
+  @keyframes nc-msg {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .nc-msg {
+    animation: nc-msg 280ms var(--nc-ease-entrance) both;
+  }
+
+  /* ── Button press: scale 0.96 on :active ── */
+  .nc-press {
+    transition: transform 100ms var(--nc-ease-state);
+  }
+  .nc-press:active {
+    transform: scale(0.96);
+  }
+
+  /* ── Mood dot breathing: 5.5s loop ── */
+  @keyframes nc-mood-breathe {
+    0%, 100% { transform: scale(1);    opacity: 0.85; }
+    50%       { transform: scale(1.06); opacity: 1;    }
+  }
+  .nc-mood-breathe {
+    animation: nc-mood-breathe 5.5s ease-in-out infinite;
+  }
+
+  /* ── Thinking dots: staggered bounce ── */
+  @keyframes nc-bounce {
+    0%, 80%, 100% { transform: translateY(0);    opacity: 0.4; }
+    40%            { transform: translateY(-4px); opacity: 1;   }
+  }
+  .nc-bounce { animation: nc-bounce 1.2s ease-in-out infinite; }
+
+  /* ── Pulsing status dot ── */
+  @keyframes nc-pulse {
+    0%, 100% { opacity: 1; transform: scale(1);   }
+    50%       { opacity: 0.5; transform: scale(1.3); }
+  }
+  .nc-pulse-anim { animation: nc-pulse 1.4s ease-in-out infinite; }
+
+  /* ── Streaming cursor blink ── */
+  @keyframes nc-blink {
+    0%, 50%   { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+  .nc-blink { animation: nc-blink 1s infinite; }
+
+  /* ── Tool badge slide in from left ── */
+  @keyframes nc-tool-slide {
+    from { opacity: 0; transform: translateX(-8px) scale(0.96); }
+    to   { opacity: 1; transform: translateX(0) scale(1); }
+  }
+  .nc-tool-slide { animation: nc-tool-slide 220ms var(--nc-ease-entrance) both; }
+
+  /* ── Skeleton shimmer ── */
+  @keyframes nc-skeleton {
+    0%   { background-position: -200% 0; }
+    100% { background-position:  200% 0; }
+  }
+  .nc-skeleton {
+    background: linear-gradient(
+      90deg,
+      var(--nc-surface-hi) 25%,
+      var(--nc-surface-alt) 50%,
+      var(--nc-surface-hi) 75%
+    );
+    background-size: 200% 100%;
+    animation: nc-skeleton 1.6s linear infinite;
+  }
+
+  /* ── Stagger entrance delays ── */
+  .nc-stagger-0 { animation-delay: 0ms; }
+  .nc-stagger-1 { animation-delay: 60ms; }
+  .nc-stagger-2 { animation-delay: 120ms; }
+  .nc-stagger-3 { animation-delay: 180ms; }
+  .nc-stagger-4 { animation-delay: 240ms; }
+  .nc-stagger-5 { animation-delay: 300ms; }
+
+  /* ── Tab indicator spring ── */
+  .nc-tab-indicator {
+    transition: transform 220ms var(--nc-ease-confirm),
+                opacity   220ms var(--nc-ease-confirm);
+  }
+
+  /* ── Bottom sheet slide up ── */
+  @keyframes nc-bottom-sheet {
+    from { transform: translateY(100%); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+  .nc-bottom-sheet {
+    animation: nc-bottom-sheet var(--nc-dur-standard) var(--nc-ease-entrance) both;
+  }
+
+  /* ── Composer auto-grow ── */
+  .nc-composer-grow {
+    transition: height 200ms var(--nc-ease-state);
+  }
+
+  /* ── Spinner ── */
+  @keyframes nc-spin {
+    to { transform: rotate(360deg); }
+  }
+  .nc-spin {
+    animation: nc-spin 1s linear infinite;
+    transform-origin: center;
+  }
+
+  /* ── Focus bloom ── */
+  .nc-focus-bloom:focus-visible {
+    outline: 2px solid var(--nc-accent);
+    outline-offset: 2px;
+    transition: outline-offset 120ms var(--nc-ease-confirm);
+  }
+
+  /* ── Voice ring pulse ── */
+  @keyframes nc-ring-pulse {
+    0%   { transform: scale(1);    opacity: 0.6; }
+    100% { transform: scale(1.35); opacity: 0; }
+  }
+  .nc-ring-pulse {
+    animation: nc-ring-pulse 2.4s ease-out infinite;
+  }
+  .nc-ring-pulse-delayed {
+    animation: nc-ring-pulse 2.4s 0.6s ease-out infinite;
+  }
+
+  /* ── Voice blob morph ── */
+  @keyframes nc-blob {
+    0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    50%       { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  }
+  .nc-blob {
+    animation: nc-blob 3s ease-in-out infinite;
+  }
+}
+
+/* ── Focus visible always (even for reduced-motion) ── */
+*:focus-visible {
+  outline: 2px solid var(--nc-accent);
+  outline-offset: 2px;
+}
+*:focus:not(:focus-visible) {
+  outline: none;
+}
